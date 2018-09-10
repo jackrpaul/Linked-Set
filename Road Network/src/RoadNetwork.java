@@ -91,10 +91,10 @@ public class RoadNetwork extends java.lang.Object
 				{
 				if(cities[i].equals(city))
 					{
-					return false;
+					return true;
 					}
 				}
-			return true;
+			return false;
 			}
 		
 		/**
