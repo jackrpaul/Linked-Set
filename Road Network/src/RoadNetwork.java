@@ -6,7 +6,7 @@
 public class RoadNetwork extends java.lang.Object
 	{
 		private int size, numberOfCities;
-		private String[] cities;
+		private City[] cities;
 		/**
 		 * This constructor creates a RoadNetwork object with a maximum size of 500 cities.
 		 */
@@ -14,7 +14,7 @@ public class RoadNetwork extends java.lang.Object
 			{
 				size = 500;
 				numberOfCities = 0;
-				cities = new String[size];
+				cities = new City[size];
 			}
 		
 		/**
@@ -25,7 +25,7 @@ public class RoadNetwork extends java.lang.Object
 			{
 				size = maxSize;
 				numberOfCities = 0;
-				cities = new String[size];
+				cities = new City[size];
 			}
 		
 		/**
@@ -41,7 +41,8 @@ public class RoadNetwork extends java.lang.Object
 				}
 			else
 				{
-				cities[numberOfCities] = name;
+				String[] temp = new String[size];
+				cities[numberOfCities] = new City(name, temp, size);
 				numberOfCities++;
 				}
 			return true;
@@ -77,6 +78,10 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public boolean connect(String city1, String city2)
 			{
+			if(!containsCity(city1) || !containsCity(city2))
+				{
+				return false;
+				}
 			return true;
 			}
 		
@@ -89,7 +94,7 @@ public class RoadNetwork extends java.lang.Object
 			{
 			for(int i = 0; i < cities.length; i++)
 				{
-				if(cities[i].equals(city))
+				if(cities[i].getName().equals(city))
 					{
 					return true;
 					}
