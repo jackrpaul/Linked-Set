@@ -166,15 +166,17 @@ public class RoadNetwork extends java.lang.Object
 		
 		/**
 		 * This method removes a specified city from the network.
-		 * @param name the name of the city
+		 * @param name The name of the city to be removed.
 		 */
 		public void removeCity(String name)
 			{
-			if(containsCity(name))
+			if(containsCity(name) && cities.length > 1)
 				{
-				
-				
+				City temp = cities[cities.length - 1];
+				cities[cities.length - 1] = cities[getIndexOf(name)];
+				cities[getIndexOf(name)] = temp;
 				}
+			cities[cities.length - 1] = null;
 			}
 		
 		/**
@@ -187,5 +189,23 @@ public class RoadNetwork extends java.lang.Object
 			return null;
 			}
 		
-		
+		/**
+		 * This method finds the exact location of a particular city in the cities array.
+		 * @param cityName The name of the city whose index is being located.
+		 * @return the array index of the specific city.
+		 */
+		public int getIndexOf(String cityName)
+			{
+			int place = 0;
+			boolean found = false;
+			while(!found)
+				{
+				if(cities[place].getName().equals(cityName))
+					{
+					found = true;
+					}
+				place++;
+				}
+			return place;
+			}
 	}
