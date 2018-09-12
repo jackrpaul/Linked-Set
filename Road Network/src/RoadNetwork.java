@@ -3,6 +3,8 @@
  * @author Jack
  *version 1.0
  */
+import java.util.Arrays;
+
 public class RoadNetwork extends java.lang.Object
 	{
 		private int size, numberOfCities;
@@ -72,8 +74,8 @@ public class RoadNetwork extends java.lang.Object
 		
 		/**
 		 * This method connects two specified cities in the network.
-		 * @param city1 the name of the first city
-		 * @param city2 the name of the second city
+		 * @param city1 the first city
+		 * @param city2 the second city
 		 * @return true if the two cities were connected by completion of the method, and false if not.
 		 */
 		public boolean connect(City city1, City city2)
@@ -111,18 +113,20 @@ public class RoadNetwork extends java.lang.Object
 		
 		/**
 		 * This method removes city 1 from city 2's connected city list, and removes city 2 from city 1's directly connected list, if possible.
-		 * @param city1 the name of the first city
-		 * @param city2 the name of the second city
+		 * @param city1 the first city
+		 * @param city2 the second city
 		 */
 		public void disconnect(City city1, City city2)
 			{
 				if(containsCity(city1.getName()) || containsCity(city2.getName()))
 					{
-					System.out.println();
-					city1.getConnectedCities()[city1.getNumOfConnectedCities()] = city2;
-					city1.setNumOfConnectedCities(city1.getNumOfConnectedCities() + 1);
-					city2.getConnectedCities()[city2.getNumOfConnectedCities()] = city1;
-					city2.setNumOfConnectedCities(city2.getNumOfConnectedCities() + 1);
+					for(int i = 0; i < city1.getConnectedCities().length; i++)
+						{
+						if(city1.getConnectedCities()[i].equals(city2))
+							{
+							City temp = city1.getConnectedCities()[city1.getNumOfConnectedCities() - 1];
+							}
+						}
 					}
 			}
 		
@@ -132,7 +136,13 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String[] getCities()
 			{
-			return null;
+			String[] cityList = new String[size];
+			for(int i = 0; i < cities.length; i++)
+				{
+				cityList[i] = cities[i].getName();
+				}
+			Arrays.sort(cityList);
+			return cityList;
 			}
 		
 		/**
@@ -162,7 +172,7 @@ public class RoadNetwork extends java.lang.Object
 			{
 			if(containsCity(name))
 				{
-				String temp = name;
+				
 				
 				}
 			}
@@ -176,4 +186,6 @@ public class RoadNetwork extends java.lang.Object
 			{
 			return null;
 			}
+		
+		
 	}
