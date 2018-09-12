@@ -2,13 +2,14 @@
 public class City
 	{
 		private String name;
-		private String[] connectedCities;
+		private City[] connectedCities;
 		private int networkSize, numOfConnectedCities;
-		public City(String n, String[] c, int ne)
+		public City(String n, City[] c, int ne)
 			{
 			name = n;
 			networkSize = ne;
-			connectedCities = new String[networkSize];
+			numOfConnectedCities = 0;
+			connectedCities = new City[networkSize];
 			}
 		public String getName()
 			{
@@ -18,12 +19,20 @@ public class City
 			{
 				this.name = name;
 			}
-		private String[] getConnectedCities()
+		public City[] getConnectedCities()
 			{
 				return connectedCities;
 			}
-		private void setConnectedCities(String[] connectedCities)
+		private void setConnectedCities(City[] connectedCities)
 			{
 				this.connectedCities = connectedCities;
+			}
+		public int getNumOfConnectedCities()
+			{
+				return numOfConnectedCities;
+			}
+		public void setNumOfConnectedCities(int numOfConnectedCities)
+			{
+				this.numOfConnectedCities = numOfConnectedCities;
 			}
 	}

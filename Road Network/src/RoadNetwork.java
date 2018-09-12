@@ -76,11 +76,18 @@ public class RoadNetwork extends java.lang.Object
 		 * @param city2 the name of the second city
 		 * @return true if the two cities were connected by completion of the method, and false if not.
 		 */
-		public boolean connect(String city1, String city2)
+		public boolean connect(City city1, City city2)
 			{
-			if(!containsCity(city1) || !containsCity(city2))
+			if(!containsCity(city1.getName()) || !containsCity(city2.getName()))
 				{
 				return false;
+				}
+			else
+				{
+				city1.getConnectedCities()[city1.getNumOfConnectedCities()] = city2;
+				city1.setNumOfConnectedCities(city1.getNumOfConnectedCities() + 1);
+				city2.getConnectedCities()[city2.getNumOfConnectedCities()] = city1;
+				city2.setNumOfConnectedCities(city2.getNumOfConnectedCities() + 1);
 				}
 			return true;
 			}
@@ -103,13 +110,20 @@ public class RoadNetwork extends java.lang.Object
 			}
 		
 		/**
-		 * This method removes city 1 from city 2's connected city list, and removes city 2 from city 1's directly connected list.
+		 * This method removes city 1 from city 2's connected city list, and removes city 2 from city 1's directly connected list, if possible.
 		 * @param city1 the name of the first city
 		 * @param city2 the name of the second city
 		 */
-		public void disconnect(String city1, String city2)
+		public void disconnect(City city1, City city2)
 			{
-			
+				if(containsCity(city1.getName()) || containsCity(city2.getName()))
+					{
+					System.out.println();
+					city1.getConnectedCities()[city1.getNumOfConnectedCities()] = city2;
+					city1.setNumOfConnectedCities(city1.getNumOfConnectedCities() + 1);
+					city2.getConnectedCities()[city2.getNumOfConnectedCities()] = city1;
+					city2.setNumOfConnectedCities(city2.getNumOfConnectedCities() + 1);
+					}
 			}
 		
 		/**
