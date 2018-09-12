@@ -43,7 +43,7 @@ public class RoadNetwork extends java.lang.Object
 				}
 			else
 				{
-				String[] temp = new String[size];
+				City[] temp = new City[size];
 				cities[numberOfCities] = new City(name, temp, size);
 				numberOfCities++;
 				}
