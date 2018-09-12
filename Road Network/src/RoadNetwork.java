@@ -9,6 +9,7 @@ public class RoadNetwork extends java.lang.Object
 	{
 		private int size, numberOfCities;
 		private City[] cities;
+		
 		/**
 		 * This constructor creates a RoadNetwork object with a maximum size of 500 cities.
 		 */
@@ -35,7 +36,7 @@ public class RoadNetwork extends java.lang.Object
 		 * @param name the name of the city
 		 * @return true if the city was successfully entered by completion of the method, and false if not.
 		 */
-		public boolean addCity(String name)
+		public boolean addCity(City name)
 			{
 			if(containsCity(name) || numberOfCities >= size)
 				{
@@ -43,8 +44,7 @@ public class RoadNetwork extends java.lang.Object
 				}
 			else
 				{
-				City[] temp = new City[size];
-				cities[numberOfCities] = new City(name, temp, size);
+				cities[numberOfCities] = name;
 				numberOfCities++;
 				}
 			return true;
@@ -80,7 +80,7 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public boolean connect(City city1, City city2)
 			{
-			if(!containsCity(city1.getName()) || !containsCity(city2.getName()))
+			if(!containsCity(city1) || !containsCity(city2))
 				{
 				return false;
 				}
@@ -99,11 +99,11 @@ public class RoadNetwork extends java.lang.Object
 		 * @param city the name of the city
 		 * @return true if the city is in the network, and false if not.
 		 */
-		public boolean containsCity(String city)
+		public boolean containsCity(City city)
 			{
 			for(int i = 0; i < cities.length; i++)
 				{
-				if(cities[i].getName().equals(city))
+				if(cities[i].equals(city))
 					{
 					return true;
 					}
@@ -118,15 +118,12 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public void disconnect(City city1, City city2)
 			{
-				if(containsCity(city1.getName()) || containsCity(city2.getName()))
+				if(containsCity(city1.getName()) && containsCity(city2.getName()))
 					{
-					for(int i = 0; i < city1.getConnectedCities().length; i++)
-						{
-						if(city1.getConnectedCities()[i].equals(city2))
-							{
-							City temp = city1.getConnectedCities()[city1.getNumOfConnectedCities() - 1];
-							}
-						}
+					City temp1 = city1.getConnectedCities()[getIndexOf(city2.getName())];
+					City temp2 = city2.getConnectedCities()[getIndexOf(city1.getName())];
+					city1.getConnectedCities()[getIndexOf(city2.getName())] = city1.getConnectedCities()[city1.getNumOfConnectedCities() - 1];
+					//temp1 = 
 					}
 			}
 		

@@ -16,7 +16,7 @@ public class City
 		 * @param c The list of Cities that this City is connected to.
 		 * @param ne The maximum size of the road network the City is being added to.
 		 */
-		public City(String n, City[] c, int ne)
+		public City(String n, int ne)
 			{
 			name = n;
 			networkSize = ne;
