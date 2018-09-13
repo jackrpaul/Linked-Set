@@ -61,10 +61,13 @@ public class RoadNetwork extends java.lang.Object
 		 * @param city2 the name of the second city
 		 * @return true if the cities are connected through a chain of roads, and false if not.
 		 */
-		public boolean areConnected(String city1, String city2)
+		/*public boolean areConnected(String city1, String city2)
 			{
-			return true;
-			}
+			if(areDirectlyConnected(city1, city2))
+				{
+				return true;
+				}
+			}*/
 		
 		/**
 		 * This method determines whether or not two cities are connected directly via a road.
@@ -134,7 +137,13 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String[] getCities()
 			{
-			return cities;
+			String[] printA = new String[numberOfCities - 1];
+			for(int i = 0; i < printA.length; i++)
+				{
+				printA[i] = cities[i];
+				}
+			Arrays.sort(printA);
+			return printA;
 			}
 		
 		/**
@@ -163,6 +172,7 @@ public class RoadNetwork extends java.lang.Object
 					count++;
 					}
 				}
+			Arrays.sort(connectedTo);
 			return connectedTo;
 			}
 		
@@ -195,8 +205,15 @@ public class RoadNetwork extends java.lang.Object
 			String print = "";
 			for(int i = 0; i < numberOfCities; i++)
 				{
-				print += cities[i] + " ";
+				print += cities[i] + " [";
+				for(int j = 0; j < getDirectlyConnectedCities(cities[i]).length; j++)
+					{
+					print += getDirectlyConnectedCities(cities[i])[j] + ", ";
+					}
+				print = print.substring(print.length() - 1);
+				print += "], ";
 				}
+			print = print.substring(print.length() - 1);
 			return print;
 			}
 		
@@ -205,7 +222,7 @@ public class RoadNetwork extends java.lang.Object
 		 * @param cityName The name of the city whose index is being located.
 		 * @return the array index of the specific city.
 		 */
-		public int getIndexOf(String cityName)
+		private int getIndexOf(String cityName)
 			{
 			int place = 0;
 			boolean found = false;
@@ -226,7 +243,7 @@ public class RoadNetwork extends java.lang.Object
 		 * @param name the name of the city
 		 * @return True if the city is last in the array, and false if not.
 		 */
-		public boolean isLastCity(String name)
+		private boolean isLastCity(String name)
 		{
 		return cities[numberOfCities - 1] == name;
 		}

@@ -33,6 +33,11 @@ public class runner
 			Colorado.removeCity("Parker");
 			System.out.println(Colorado.getCityCount());
 			System.out.println(Colorado.containsCity("Parker"));
+			
+			
+			System.out.println(Colorado.getCities());
+			System.out.println(Colorado.getDirectlyConnectedCities("Denver"));
+			//System.out.println(Colorado.toString());
 			}
 
 	}
