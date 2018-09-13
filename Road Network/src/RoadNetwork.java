@@ -1,5 +1,5 @@
 /**
- * This class creates a road network between cities within a state. INSERT FURTHER EXPLANATION HERE.
+ * This class creates a road network between cities within a state. Each city is connected by 
  * @author Jack
  *version 1.0
  */
@@ -8,16 +8,19 @@ import java.util.Arrays;
 public class RoadNetwork extends java.lang.Object
 	{
 		private int size, numberOfCities;
-		private City[] cities;
+		private String[]cities;
+		private boolean [][]connected;
+		public static final int DEFAULT_SIZE = 500;
 		
 		/**
 		 * This constructor creates a RoadNetwork object with a maximum size of 500 cities.
 		 */
 		public RoadNetwork()
 			{
-				size = 500;
+				size = DEFAULT_SIZE;
 				numberOfCities = 0;
-				cities = new City[size];
+				cities = new String[size];
+				connected = new boolean[size][size];
 			}
 		
 		/**
@@ -28,7 +31,8 @@ public class RoadNetwork extends java.lang.Object
 			{
 				size = maxSize;
 				numberOfCities = 0;
-				cities = new City[size];
+				cities = new String[size];
+				connected = new boolean[size][size];
 			}
 		
 		/**
@@ -36,9 +40,9 @@ public class RoadNetwork extends java.lang.Object
 		 * @param name the name of the city
 		 * @return true if the city was successfully entered by completion of the method, and false if not.
 		 */
-		public boolean addCity(City name)
+		public boolean addCity(String name)
 			{
-			if(containsCity(name) || numberOfCities >= size)
+			if(numberOfCities >= size)
 				{
 				return false;
 				}
@@ -78,7 +82,7 @@ public class RoadNetwork extends java.lang.Object
 		 * @param city2 the second city
 		 * @return true if the two cities were connected by completion of the method, and false if not.
 		 */
-		public boolean connect(City city1, City city2)
+		public boolean connect(String city1, String city2)
 			{
 			if(!containsCity(city1) || !containsCity(city2))
 				{
@@ -86,10 +90,7 @@ public class RoadNetwork extends java.lang.Object
 				}
 			else
 				{
-				city1.getConnectedCities()[city1.getNumOfConnectedCities()] = city2;
-				city1.setNumOfConnectedCities(city1.getNumOfConnectedCities() + 1);
-				city2.getConnectedCities()[city2.getNumOfConnectedCities()] = city1;
-				city2.setNumOfConnectedCities(city2.getNumOfConnectedCities() + 1);
+				connected[getIndexOf(city1)][getIndexOf(city2)] = true;
 				}
 			return true;
 			}
@@ -99,7 +100,7 @@ public class RoadNetwork extends java.lang.Object
 		 * @param city the name of the city
 		 * @return true if the city is in the network, and false if not.
 		 */
-		public boolean containsCity(City city)
+		public boolean containsCity(String city)
 			{
 			for(int i = 0; i < cities.length; i++)
 				{
@@ -133,13 +134,8 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String[] getCities()
 			{
-			String[] cityList = new String[size];
-			for(int i = 0; i < cities.length; i++)
-				{
-				cityList[i] = cities[i].getName();
-				}
-			Arrays.sort(cityList);
-			return cityList;
+			Arrays.sort(cities);
+			return cities;
 			}
 		
 		/**
@@ -197,7 +193,7 @@ public class RoadNetwork extends java.lang.Object
 			boolean found = false;
 			while(!found)
 				{
-				if(cities[place].getName().equals(cityName))
+				if(cities[place].equals(cityName))
 					{
 					found = true;
 					}
