@@ -151,17 +151,22 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String[] getDirectlyConnectedCities(String name)
 			{
+			int count = 0;
+			String temp = "";
 			String [] connectedTo = new String[numberOfCities - 1];
 			for(int i = 0; i < connected.length; i++)
 				{
 				for(int j = 0; j < connected[0].length; i++)
 					{
-					if(connected[i][j] == true)
+					/*if()
 						{
-						
-						}
+						connectedTo[count] = cities[j];
+						temp += cities[j] + " ";
+						count++;
+						}*/
 					}
 				}
+			System.out.println(temp);
 			return connectedTo;
 			}
 		
@@ -192,8 +197,7 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String toString()
 			{
-			String[] printArray = toArray();
-			return Arrays.toString(printArray);
+			return cities.toString();
 			}
 		
 		/**
