@@ -1,9 +1,10 @@
 /**
- * This class creates a road network between cities within a state. Each city is connected by 
+ * This class creates a road network between cities within a state. Cities are connected by two-sided roads. This class helps to keep track of connections and provides the ability to create and remove connections.
+ * Working Classes: addCity, containsCity, connect, disconnect, areDirectlyConnected
  * @author Jack
  *version 1.0
  */
-import java.util.Arrays;
+import java.util.*;
 
 public class RoadNetwork extends java.lang.Object
 	{
@@ -73,7 +74,7 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public boolean areDirectlyConnected(String city1, String city2)
 			{
-			return true;
+			return connected[getIndexOf(city1)][getIndexOf(city2)];
 			}
 		
 		/**
@@ -114,17 +115,14 @@ public class RoadNetwork extends java.lang.Object
 		
 		/**
 		 * This method removes city 1 from city 2's connected city list, and removes city 2 from city 1's directly connected list, if possible.
-		 * @param city1 the first city
-		 * @param city2 the second city
+		 * @param city1 the name of the first city
+		 * @param city2 the name of the second city
 		 */
-		public void disconnect(City city1, City city2)
+		public void disconnect(String city1, String city2)
 			{
-				if(containsCity(city1.getName()) && containsCity(city2.getName()))
+				if(containsCity(city1) && containsCity(city2) && areDirectlyConnected(city1, city2))
 					{
-					City temp1 = city1.getConnectedCities()[getIndexOf(city2.getName())];
-					City temp2 = city2.getConnectedCities()[getIndexOf(city1.getName())];
-					city1.getConnectedCities()[getIndexOf(city2.getName())] = city1.getConnectedCities()[city1.getNumOfConnectedCities() - 1];
-					//temp1 = 
+					connected[getIndexOf(city1)][getIndexOf(city2)] = false;
 					}
 			}
 		
@@ -165,11 +163,13 @@ public class RoadNetwork extends java.lang.Object
 			{
 			if(containsCity(name) && cities.length > 1)
 				{
-				City temp = cities[cities.length - 1];
-				cities[cities.length - 1] = cities[getIndexOf(name)];
-				cities[getIndexOf(name)] = temp;
+				if(!isLastCity(name))
+					{
+					//do stuff here
+					}
 				}
 			cities[cities.length - 1] = null;
+			numberOfCities--;
 			}
 		
 		/**
@@ -201,4 +201,9 @@ public class RoadNetwork extends java.lang.Object
 				}
 			return place;
 			}
+		
+		private boolean isLastCity(String name)
+		{
+		return cities[numberOfCities - 1] == name;
+		}
 	}
