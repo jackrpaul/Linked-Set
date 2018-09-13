@@ -180,9 +180,9 @@ public class RoadNetwork extends java.lang.Object
 					cities[getIndexOf(name)] = cities[numberOfCities - 1];
 					cities[numberOfCities - 1] = temp;
 					}
+				cities[numberOfCities - 1] = null;
+				numberOfCities--;
 				}
-			cities[numberOfCities - 1] = null;
-			numberOfCities--;
 			}
 		
 		/**
@@ -192,7 +192,12 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String toString()
 			{
-			return cities.toString();
+			String print = "";
+			for(int i = 0; i < numberOfCities; i++)
+				{
+				print += cities[i] + " ";
+				}
+			return print;
 			}
 		
 		/**
@@ -209,6 +214,7 @@ public class RoadNetwork extends java.lang.Object
 				if(cities[place].equals(cityName))
 					{
 					found = true;
+					break;
 					}
 				place++;
 				}
@@ -220,7 +226,7 @@ public class RoadNetwork extends java.lang.Object
 		 * @param name the name of the city
 		 * @return True if the city is last in the array, and false if not.
 		 */
-		private boolean isLastCity(String name)
+		public boolean isLastCity(String name)
 		{
 		return cities[numberOfCities - 1] == name;
 		}

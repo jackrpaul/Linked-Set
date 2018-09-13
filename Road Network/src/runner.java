@@ -14,6 +14,7 @@ public class runner
 			Colorado.addCity("Golden");
 			Colorado.addCity("Parker");
 			Colorado.addCity("Lakewood");
+			Colorado.addCity("Boulder");
 			
 			System.out.println(Colorado.connect("Denver", "Littleton"));
 			System.out.println(Colorado.connect("Denver", "Parker"));
@@ -29,13 +30,9 @@ public class runner
 			System.out.println(Colorado.getCityCount());
 			System.out.println(Colorado.getCities());
 			
-			Colorado.removeCity("Golden");
-			Colorado.removeCity("Lakewood");
+			Colorado.removeCity("Parker");
 			System.out.println(Colorado.getCityCount());
-			System.out.println(Colorado.containsCity("Golden"));
-			System.out.println(Colorado.containsCity("Lakewood"));
-			
-			System.out.println(Colorado.toString());
+			System.out.println(Colorado.containsCity("Parker"));
 			}
 
 	}
