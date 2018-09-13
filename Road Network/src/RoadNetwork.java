@@ -74,7 +74,7 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public boolean areDirectlyConnected(String city1, String city2)
 			{
-			return connected[getIndexOf(city1)][getIndexOf(city2)];
+			return connected[getIndexOf(city1)][getIndexOf(city2)] && connected[getIndexOf(city2)][getIndexOf(city1)];
 			}
 		
 		/**
@@ -92,6 +92,7 @@ public class RoadNetwork extends java.lang.Object
 			else
 				{
 				connected[getIndexOf(city1)][getIndexOf(city2)] = true;
+				connected[getIndexOf(city2)][getIndexOf(city1)] = true;
 				}
 			return true;
 			}
@@ -123,6 +124,7 @@ public class RoadNetwork extends java.lang.Object
 				if(containsCity(city1) && containsCity(city2) && areDirectlyConnected(city1, city2))
 					{
 					connected[getIndexOf(city1)][getIndexOf(city2)] = false;
+					connected[getIndexOf(city2)][getIndexOf(city1)] = false;
 					}
 			}
 		
@@ -152,21 +154,15 @@ public class RoadNetwork extends java.lang.Object
 		public String[] getDirectlyConnectedCities(String name)
 			{
 			int count = 0;
-			String temp = "";
-			String [] connectedTo = new String[numberOfCities - 1];
-			for(int i = 0; i < connected.length; i++)
+			String [] connectedTo = new String[numberOfCities];
+			for(int i = 0; i < numberOfCities; i++)
 				{
-				for(int j = 0; j < connected[0].length; i++)
+				if(cities[i] != name && areDirectlyConnected(name, cities[i]))
 					{
-					/*if()
-						{
-						connectedTo[count] = cities[j];
-						temp += cities[j] + " ";
-						count++;
-						}*/
+					connectedTo[count] = cities[i];
+					count++;
 					}
 				}
-			System.out.println(temp);
 			return connectedTo;
 			}
 		
@@ -180,14 +176,13 @@ public class RoadNetwork extends java.lang.Object
 				{
 				if(!isLastCity(name))
 					{
-					String temp = cities[numberOfCities - 1];
-					cities[numberOfCities - 1] = cities[getIndexOf(name)];
-					cities[getIndexOf(name)] = temp;
+					String temp = cities[getIndexOf(name)];
+					cities[getIndexOf(name)] = cities[numberOfCities - 1];
+					cities[numberOfCities - 1] = temp;
 					}
 				}
 			cities[numberOfCities - 1] = null;
 			numberOfCities--;
-			//System.out.println(cities[]);
 			}
 		
 		/**

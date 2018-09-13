@@ -30,8 +30,10 @@ public class runner
 			System.out.println(Colorado.getCities());
 			
 			Colorado.removeCity("Golden");
+			Colorado.removeCity("Lakewood");
 			System.out.println(Colorado.getCityCount());
 			System.out.println(Colorado.containsCity("Golden"));
+			System.out.println(Colorado.containsCity("Lakewood"));
 			
 			System.out.println(Colorado.toString());
 			}
