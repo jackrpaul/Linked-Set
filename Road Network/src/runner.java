@@ -21,11 +21,13 @@ public class runner
 			System.out.println(Colorado.areDirectlyConnected("Denver", "Littleton"));
 			
 			System.out.println(Colorado.getCityCount());
-			//System.out.println(Colorado.getCities());
+			System.out.println(Colorado.getCities());
 			
 			Colorado.removeCity("Golden");
 			System.out.println(Colorado.getCityCount());
 			System.out.println(Colorado.containsCity("Golden"));
+			
+			
 			}
 
 	}

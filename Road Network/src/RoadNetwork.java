@@ -1,10 +1,10 @@
 /**
  * This class creates a road network between cities within a state. Cities are connected by two-sided roads. This class helps to keep track of connections and provides the ability to create and remove connections.
- * Working Classes: addCity, containsCity, connect, disconnect, areDirectlyConnected
+ * Working Classes: addCity, containsCity, connect, disconnect, areDirectlyConnected, removeCity, getIndexOf, isLastCity, getCities, 
  * @author Jack
  *version 1.0
  */
-import java.util.*;
+import java.util.Arrays;
 
 public class RoadNetwork extends java.lang.Object
 	{
@@ -103,7 +103,7 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public boolean containsCity(String city)
 			{
-			for(int i = 0; i < cities.length; i++)
+			for(int i = 0; i < numberOfCities; i++)
 				{
 				if(cities[i].equals(city))
 					{
@@ -132,7 +132,6 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String[] getCities()
 			{
-			Arrays.sort(cities);
 			return cities;
 			}
 		
@@ -152,7 +151,18 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String[] getDirectlyConnectedCities(String name)
 			{
-			return null;
+			String [] connectedTo = new String[numberOfCities - 1];
+			for(int i = 0; i < connected.length; i++)
+				{
+				for(int j = 0; j < connected[0].length; i++)
+					{
+					if(connected[i][j] == true)
+						{
+						
+						}
+					}
+				}
+			return connectedTo;
 			}
 		
 		/**
@@ -165,11 +175,14 @@ public class RoadNetwork extends java.lang.Object
 				{
 				if(!isLastCity(name))
 					{
-					//do stuff here
+					String temp = cities[numberOfCities - 1];
+					cities[numberOfCities - 1] = cities[getIndexOf(name)];
+					cities[getIndexOf(name)] = temp;
 					}
 				}
-			cities[cities.length - 1] = null;
+			cities[numberOfCities - 1] = null;
 			numberOfCities--;
+			//System.out.println(cities[]);
 			}
 		
 		/**
@@ -179,7 +192,8 @@ public class RoadNetwork extends java.lang.Object
 		 */
 		public String toString()
 			{
-			return null;
+			String[] printArray = toArray();
+			return Arrays.toString(printArray);
 			}
 		
 		/**
@@ -202,6 +216,11 @@ public class RoadNetwork extends java.lang.Object
 			return place;
 			}
 		
+		/**
+		 * This method determines whether or not a city is the last one in the network's array.
+		 * @param name the name of the city
+		 * @return True if the city is last in the array, and false if not.
+		 */
 		private boolean isLastCity(String name)
 		{
 		return cities[numberOfCities - 1] == name;
