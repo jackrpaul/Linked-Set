@@ -20,6 +20,8 @@ public class runner
 			System.out.println(Colorado.connect("Denver", "Parker"));
 			System.out.println(Colorado.connect("Denver", "Lakewood"));
 			
+			System.out.println(Colorado.connect("Littleton", "Denver"));
+			
 			System.out.println(Colorado.areDirectlyConnected("Denver", "Littleton"));
 			System.out.println(Colorado.areDirectlyConnected("Denver", "Golden"));
 			System.out.println(Colorado.getDirectlyConnectedCities("Denver"));
@@ -37,7 +39,7 @@ public class runner
 			
 			System.out.println(Colorado.getCities());
 			System.out.println(Colorado.getDirectlyConnectedCities("Denver"));
-			//System.out.println(Colorado.toString());
+			System.out.println(Colorado.toString());
 			}
 
 	}
